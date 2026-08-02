@@ -1,15 +1,24 @@
 package com.example.smarthome;
 
 public class Radio {
-    private int currentStation; // 0–9
-    private int currentVolume;  // 0–100
+    private int currentStation;
+    private int currentVolume;
 
     public Radio() {
         this.currentStation = 0;
         this.currentVolume = 0;
     }
 
-    // --- Управление радиостанциями ---
+    public int getCurrentStation() {
+        return currentStation;
+    }
+
+    public void setStation(int station) {
+        if (station >= 0 && station <= 9) {
+            this.currentStation = station;
+        }
+        // Если значение вне диапазона — игнорируем
+    }
 
     public void next() {
         if (currentStation == 9) {
@@ -27,19 +36,16 @@ public class Radio {
         }
     }
 
-    public void setStation(int station) {
-        if (station >= 0 && station <= 9) {
-            this.currentStation = station;
+    public int getCurrentVolume() {
+        return currentVolume;
+    }
+
+    public void setVolume(int volume) {
+        if (volume >= 0 && volume <= 100) {
+            this.currentVolume = volume;
         }
-        // Если значение вне диапазона — ничего не делаем (как принято в таких задачах).
-        // Можно выбросить исключение, если в курсе требуют явно.
+        // Если значение вне диапазона — игнорируем
     }
-
-    public int getCurrentStation() {
-        return currentStation;
-    }
-
-    // --- Управление громкостью ---
 
     public void increaseVolume() {
         if (currentVolume < 100) {
@@ -51,16 +57,5 @@ public class Radio {
         if (currentVolume > 0) {
             currentVolume--;
         }
-    }
-
-    public void setVolume(int volume) {
-        if (volume >= 0 && volume <= 100) {
-            this.currentVolume = volume;
-        }
-        // Аналогично: вне диапазона — игнорируем.
-    }
-
-    public int getCurrentVolume() {
-        return currentVolume;
     }
 }
